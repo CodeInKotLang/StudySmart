@@ -26,6 +26,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +41,7 @@ import com.example.studysmart.R
 import com.example.studysmart.domain.model.Session
 import com.example.studysmart.domain.model.Subject
 import com.example.studysmart.domain.model.Task
+import com.example.studysmart.presentation.components.AddSubjectDialog
 import com.example.studysmart.presentation.components.CountCard
 import com.example.studysmart.presentation.components.SubjectCard
 import com.example.studysmart.presentation.components.studySessionsList
@@ -45,11 +51,36 @@ import com.example.studysmart.presentation.components.tasksList
 fun DashboardScreen() {
 
     val subjects = listOf(
-        Subject(name = "English", goalHours = 10f, colors = Subject.subjectCardColors[0], subjectId = 0),
-        Subject(name = "Physics", goalHours = 10f, colors = Subject.subjectCardColors[1], subjectId = 0),
-        Subject(name = "Maths", goalHours = 10f, colors = Subject.subjectCardColors[2], subjectId = 0),
-        Subject(name = "Geology", goalHours = 10f, colors = Subject.subjectCardColors[3], subjectId = 0),
-        Subject(name = "Fine Arts", goalHours = 10f, colors = Subject.subjectCardColors[4], subjectId = 0),
+        Subject(
+            name = "English",
+            goalHours = 10f,
+            colors = Subject.subjectCardColors[0],
+            subjectId = 0
+        ),
+        Subject(
+            name = "Physics",
+            goalHours = 10f,
+            colors = Subject.subjectCardColors[1],
+            subjectId = 0
+        ),
+        Subject(
+            name = "Maths",
+            goalHours = 10f,
+            colors = Subject.subjectCardColors[2],
+            subjectId = 0
+        ),
+        Subject(
+            name = "Geology",
+            goalHours = 10f,
+            colors = Subject.subjectCardColors[3],
+            subjectId = 0
+        ),
+        Subject(
+            name = "Fine Arts",
+            goalHours = 10f,
+            colors = Subject.subjectCardColors[4],
+            subjectId = 0
+        ),
     )
 
     val tasks = listOf(
@@ -143,6 +174,26 @@ fun DashboardScreen() {
         )
     )
 
+    var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
+
+    var subjectName by remember { mutableStateOf("") }
+    var goalHours by remember { mutableStateOf("") }
+    var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
+
+    AddSubjectDialog(
+        isOpen = isAddSubjectDialogOpen,
+        subjectName = subjectName,
+        goalHours = goalHours,
+        onSubjectNameChange = { subjectName = it },
+        onGoalHoursChange = { goalHours = it },
+        selectedColors = selectedColor,
+        onColorChange = { selectedColor = it },
+        onDismissRequest = { isAddSubjectDialogOpen = false },
+        onConfirmButtonClick = {
+            isAddSubjectDialogOpen = false
+        }
+    )
+
     Scaffold(
         topBar = { DashboardScreenTopBar() }
     ) { paddingValues ->
@@ -164,7 +215,8 @@ fun DashboardScreen() {
             item {
                 SubjectCardsSection(
                     modifier = Modifier.fillMaxWidth(),
-                    subjectList = subjects
+                    subjectList = subjects,
+                    onAddIconClicked = { isAddSubjectDialogOpen = true }
                 )
             }
             item {
@@ -244,7 +296,8 @@ private fun CountCardsSection(
 private fun SubjectCardsSection(
     modifier: Modifier,
     subjectList: List<Subject>,
-    emptyListText: String = "You don't have any subjects.\n Click the + button to add new subject."
+    emptyListText: String = "You don't have any subjects.\n Click the + button to add new subject.",
+    onAddIconClicked: () -> Unit
 ) {
     Column(modifier = modifier) {
         Row(
@@ -257,7 +310,7 @@ private fun SubjectCardsSection(
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(start = 12.dp)
             )
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = onAddIconClicked) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add Subject"
