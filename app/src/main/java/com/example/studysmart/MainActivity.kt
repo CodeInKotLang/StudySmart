@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
 val subjects = listOf(
     Subject(
-        name = "English",
+        name = "Englishss",
         goalHours = 10f,
         colors = Subject.subjectCardColors[0],
         subjectId = 0
