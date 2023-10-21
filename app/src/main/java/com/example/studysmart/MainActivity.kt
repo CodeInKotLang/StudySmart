@@ -6,16 +6,16 @@ import androidx.activity.compose.setContent
 import com.example.studysmart.domain.model.Session
 import com.example.studysmart.domain.model.Subject
 import com.example.studysmart.domain.model.Task
-import com.example.studysmart.presentation.session.SessionScreen
-import com.example.studysmart.presentation.task.TaskScreen
+import com.example.studysmart.presentation.NavGraphs
 import com.example.studysmart.presentation.theme.StudySmartTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             StudySmartTheme {
-                SessionScreen()
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
     }
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
 val subjects = listOf(
     Subject(
-        name = "Englishss",
+        name = "English",
         goalHours = 10f,
         colors = Subject.subjectCardColors[0],
         subjectId = 0
