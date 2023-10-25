@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.Delete
 import com.example.studysmart.R
 import com.example.studysmart.domain.model.Session
@@ -65,6 +66,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun DashboardScreenRoute(
     navigator: DestinationsNavigator
 ) {
+
+    val viewModel: DashboardViewModel = hiltViewModel()
+
     DashboardScreen(
         onSubjectCardClick = { subjectId ->
             subjectId?.let {
