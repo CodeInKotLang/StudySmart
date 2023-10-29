@@ -11,9 +11,9 @@ interface SubjectRepository {
 
     fun getTotalGoalHours(): Flow<Float>
 
-    suspend fun deleteSubject(subjectInt: Int)
+    suspend fun deleteSubject(subjectId: Int)
 
-    suspend fun getSubjectById(subjectInt: Int): Subject?
+    suspend fun getSubjectById(subjectId: Int): Subject?
 
     fun getAllSubjects(): Flow<List<Subject>>
 }
