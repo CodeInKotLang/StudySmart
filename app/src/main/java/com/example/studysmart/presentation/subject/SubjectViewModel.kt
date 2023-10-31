@@ -84,13 +84,14 @@ class SubjectViewModel @Inject constructor(
                 }
             }
 
-            SubjectEvent.UpdateSubject -> updateSubject()
-            SubjectEvent.DeleteSubject -> deleteSubject()
-            SubjectEvent.DeleteSession -> {}
             is SubjectEvent.OnDeleteSessionButtonClick -> {}
             is SubjectEvent.OnTaskIsCompleteChange -> {
                 updateTask(event.task)
             }
+
+            SubjectEvent.UpdateSubject -> updateSubject()
+            SubjectEvent.DeleteSubject -> deleteSubject()
+            SubjectEvent.DeleteSession -> {}
 
             SubjectEvent.UpdateProgress -> {
                 val goalStudyHours = state.value.goalStudyHours.toFloatOrNull() ?: 1f
@@ -121,7 +122,7 @@ class SubjectViewModel @Inject constructor(
                 _snackbarEventFlow.emit(
                     SnackbarEvent.ShowSnackbar(
                         message = "Couldn't update subject. ${e.message}",
-                        SnackbarDuration.Long
+                        duration = SnackbarDuration.Long
                     )
                 )
             }
@@ -136,7 +137,7 @@ class SubjectViewModel @Inject constructor(
                         it.copy(
                             subjectName = subject.name,
                             goalStudyHours = subject.goalHours.toString(),
-                            subjectCardColors = subject.colors.map { Color(it) },
+                            subjectCardColors = subject.colors.map { colors -> Color(colors) },
                             currentSubjectId = subject.subjectId
                         )
                     }
@@ -190,8 +191,8 @@ class SubjectViewModel @Inject constructor(
             } catch (e: Exception) {
                 _snackbarEventFlow.emit(
                     SnackbarEvent.ShowSnackbar(
-                        "Couldn't update task. ${e.message}",
-                        SnackbarDuration.Long
+                        message = "Couldn't update task. ${e.message}",
+                        duration = SnackbarDuration.Long
                     )
                 )
             }

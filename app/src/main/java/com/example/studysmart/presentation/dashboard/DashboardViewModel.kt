@@ -54,14 +54,14 @@ class DashboardViewModel @Inject constructor(
     val tasks: StateFlow<List<Task>> = taskRepository.getAllUpcomingTasks()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
             initialValue = emptyList()
         )
 
     val recentSessions: StateFlow<List<Session>> = sessionRepository.getRecentFiveSessions()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
             initialValue = emptyList()
         )
 
@@ -140,13 +140,13 @@ class DashboardViewModel @Inject constructor(
                     )
                 }
                 _snackbarEventFlow.emit(
-                    SnackbarEvent.ShowSnackbar("Subject saved successfully")
+                    SnackbarEvent.ShowSnackbar(message = "Subject saved successfully")
                 )
             } catch (e: Exception) {
                 _snackbarEventFlow.emit(
                     SnackbarEvent.ShowSnackbar(
-                        "Couldn't save subject. ${e.message}",
-                        SnackbarDuration.Long
+                        message = "Couldn't save subject. ${e.message}",
+                        duration = SnackbarDuration.Long
                     )
                 )
             }

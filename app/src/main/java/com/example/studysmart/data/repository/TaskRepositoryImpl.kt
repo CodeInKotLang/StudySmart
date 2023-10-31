@@ -23,14 +23,14 @@ class TaskRepositoryImpl @Inject constructor(
         return taskDao.getTaskById(taskId)
     }
 
-    override fun getUpcomingTasksForSubject(subjectInt: Int): Flow<List<Task>> {
-        return taskDao.getTasksForSubject(subjectInt)
+    override fun getUpcomingTasksForSubject(subjectId: Int): Flow<List<Task>> {
+        return taskDao.getTasksForSubject(subjectId)
             .map { tasks -> tasks.filter { it.isComplete.not() } }
             .map { tasks -> sortTasks(tasks) }
     }
 
-    override fun getCompletedTasksForSubject(subjectInt: Int): Flow<List<Task>> {
-        return taskDao.getTasksForSubject(subjectInt)
+    override fun getCompletedTasksForSubject(subjectId: Int): Flow<List<Task>> {
+        return taskDao.getTasksForSubject(subjectId)
             .map { tasks -> tasks.filter { it.isComplete } }
             .map { tasks -> sortTasks(tasks) }
     }

@@ -119,7 +119,7 @@ class TaskViewModel @Inject constructor(
             } catch (e: Exception) {
                 _snackbarEventFlow.emit(
                     SnackbarEvent.ShowSnackbar(
-                        message = "Couldn't Task subject. ${e.message}",
+                        message = "Couldn't delete task. ${e.message}",
                         duration = SnackbarDuration.Long
                     )
                 )
@@ -133,8 +133,7 @@ class TaskViewModel @Inject constructor(
             if (state.subjectId == null || state.relatedToSubject == null) {
                 _snackbarEventFlow.emit(
                     SnackbarEvent.ShowSnackbar(
-                        message = "Please select subject related to the task",
-                        SnackbarDuration.Long
+                        message = "Please select subject related to the task"
                     )
                 )
                 return@launch
@@ -160,7 +159,7 @@ class TaskViewModel @Inject constructor(
                 _snackbarEventFlow.emit(
                     SnackbarEvent.ShowSnackbar(
                         message = "Couldn't save task. ${e.message}",
-                        SnackbarDuration.Long
+                        duration = SnackbarDuration.Long
                     )
                 )
             }
