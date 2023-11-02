@@ -6,7 +6,6 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.Build
-import android.os.IBinder
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.NotificationCompat
 import com.example.studysmart.util.Constants.ACTION_SERVICE_CANCEL
@@ -45,6 +44,7 @@ class StudySessionTimerService : Service() {
         private set
     var currentTimerState = mutableStateOf(TimerState.IDLE)
         private set
+    var subjectId = mutableStateOf<Int?>(null)
 
     override fun onBind(p0: Intent?) = binder
 
