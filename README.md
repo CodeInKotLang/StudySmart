@@ -16,7 +16,8 @@ This course covers a range of topics including:
 
 🎥 All course videos can be found on the [YouTube Course Playlist](https://youtube.com/playlist?list=PL1b73-6UjePA9ck6zJjMJoq_8TOxBgdsc&si=z0pG20iCs3Q3eKeY).
 
-![2](https://github.com/CodeInKotLang/StudySmart/assets/110901093/4c412f4b-fa13-47e6-b477-94c93b67cff4)
+![Screenshot (162)](https://github.com/CodeInKotLang/StudySmart/assets/110901093/a75366b9-23be-462f-b1b2-f6ad9da43317)
+
 
 ## Contributing
 
