@@ -1,4 +1,4 @@
-package com.example.studysmart.ui.theme
+package com.example.studysmart.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
